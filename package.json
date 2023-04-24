@@ -8,10 +8,8 @@
     "npm": "7.4.3"
   },
   "scripts": {
-
     "dev": "nodemon server.js",
-    "start": "node server.js",
-   
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
