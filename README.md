@@ -5,13 +5,13 @@
 Do follwoing in root folder:\
 create .env file with following variables:\
 MONGO_URL =\
-JWT_SECRET =\
+JWT_SECRET =
 
 npm install\
-npm run dev\
+npm run dev
 
 ## For running client
 
 cd client\
 npm install\
-npm start\
+npm start
