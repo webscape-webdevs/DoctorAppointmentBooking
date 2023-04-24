@@ -1,0 +1,75 @@
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+  height: 100%;
+}
+
+.stepMain {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.booking-textArea {
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 20px;
+  border-color: rgb(168, 168, 168);
+}
+
+.diabetic {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.booking-radio {
+  margin-top: 10px;
+  margin-right: 20px;
+  width: 25px;
+  accent-color: #1976d2;
+}
+
+.orderSuccess {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.orderSuccess > svg {
+  font-size: 7vmax;
+  color: #1976d2;
+}
+.orderSuccess > p {
+  font-size: 4vmax;
+}
+.orderSuccess > a {
+  background-color: rgb(51, 51, 51);
+  color: white;
+  border: none;
+  padding: 20px;
+  width: 300px;
+  cursor: pointer;
+  font: 400 1vmax "Roboto";
+  text-decoration: none;
+  margin: 2vmax;
+}
+
+@media screen and (max-width: 600px) {
+  .orderSuccess > a {
+    padding: 3vw 6vw;
+    font: 400 4vw "Roboto";
+    margin: 2vmax;
+  }
+
+  .orderSuccess > svg {
+    font-size: 20vw;
+  }
+  .orderSuccess > p {
+    margin: 2vmax;
+    font-size: 5vw;
+  }
+}
