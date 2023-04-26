@@ -5,6 +5,26 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const Appointment = require("../models/appointmentModel");
 const User = require("../models/userModel");
 const Prescription = require("../models/prescriptionsModel");
+const nodemailer = require("nodemailer");
+const multer = require("multer");
+
+let mailTransporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
+
+const storage = multer.diskStorage({
+  destination: "public/",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({
+  storage: storage,
+});
 
 router.post("/get-doctor-info-by-user-id", authMiddleware, async (req, res) => {
   try {
@@ -127,6 +147,35 @@ router.post("/get-prescriptions", authMiddleware, async (req, res) => {
       success: false,
       error,
     });
+  }
+});
+
+router.post("/send-mail-prescription", upload.single("file"), async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    let details = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Prescription PDF",
+      html: `<p>Find the Prescripton PDF Below</p>`,
+      attachments: [
+        {
+          filename: "Prescription.pdf",
+          contentType: "application/pdf",
+          content: "../public/prescription.pdf",
+        },
+      ],
+    };
+
+    mailTransporter.sendMail(details);
+
+    res.status(200).json({
+      ok: true,
+      msg: "Email Sent Successfully",
+    });
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
