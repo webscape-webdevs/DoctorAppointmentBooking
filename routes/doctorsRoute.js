@@ -7,6 +7,8 @@ const User = require("../models/userModel");
 const Prescription = require("../models/prescriptionsModel");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
@@ -154,6 +156,8 @@ router.post("/send-mail-prescription", upload.single("file"), async (req, res) =
   try {
     const { email } = req.body;
 
+    var filepath = path.join(__dirname, "../public/prescription.pdf");
+
     let details = {
       from: process.env.EMAIL,
       to: email,
@@ -163,7 +167,7 @@ router.post("/send-mail-prescription", upload.single("file"), async (req, res) =
         {
           filename: "Prescription.pdf",
           contentType: "application/pdf",
-          content: "../public/prescription.pdf",
+          content: fs.createReadStream(filepath),
         },
       ],
     };
